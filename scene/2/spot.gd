@@ -27,7 +27,7 @@ func init_basic_setting() -> void:
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color.SLATE_GRAY
 	bg.set("theme_override_styles/panel", style)
-	recolor("subtype")
+	recolor("sector")
 
 
 func recolor(condition_: String):

@@ -68,7 +68,7 @@ func init_spots_subtype() -> void:
 	var grid = Vector2(ceil(Global.num.spot.row / 2), floor(Global.num.spot.col / 2))
 	var core = get_spot(grid)
 	core.subtype = "core"
-	core.recolor("subtype")
+	#core.recolor("subtype")
 	
 	var subtypes = ["axis", "diagonal"]
 	
@@ -84,7 +84,7 @@ func init_spots_subtype() -> void:
 			
 			while spot != null:
 				spot.subtype = subtype
-				spot.recolor("subtype")
+				#spot.recolor("subtype")
 				grid += direction
 				spot = get_spot(grid)
 

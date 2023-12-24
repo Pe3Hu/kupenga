@@ -23,8 +23,12 @@ func _ready() -> void:
 
 
 func init_arr() -> void:
-	arr.edge = [1, 2, 3, 4, 5, 6]
 	arr.windrose = ["N", "E", "S", "W"]
+	arr.sector = [0, 1, 2, 3, 4]
+	arr.type = ["corner", "edge", "center"]
+	arr.subtype = ["core", "axis", "diagonal", "variance"]
+	arr.comparison = ["less", "equal", "more"]
+	arr.kind = ["sector", "type", "subtype", "comparison"]
 
 
 func init_num() -> void:
@@ -107,6 +111,35 @@ func init_windrose() -> void:
 				windrose = "NW"
 			
 			dict.windrose[windrose] = direction
+	
+	init_direction()
+
+
+func init_direction() -> void:
+	dict.direction = {}
+	var step = 2
+	var n = dict.windrose.keys().size()
+	
+	for _i in n:
+		for _j in 2:
+			var indexs = []
+			
+			for _l in _j + 1:
+				var index = (_i + _l * step) % n
+				indexs.append(index)
+				
+			
+			indexs.sort()
+			var direction = ""
+			
+			for index in indexs:
+				direction += str(index)
+			
+			var weight = pow(4, 2-_j)
+			dict.direction[direction] = weight
+	
+	dict.direction["0246"] = 1
+	dict.direction["1357"] = 1
 
 
 func init_blank() -> void:
@@ -131,9 +164,15 @@ func init_node() -> void:
 
 
 func init_scene() -> void:
+	scene.architect = load("res://scene/1/architect.tscn")
 	
 	scene.field = load("res://scene/2/field.tscn")
 	scene.spot = load("res://scene/2/spot.tscn")
+	
+	scene.portfolio = load("res://scene/3/portfolio.tscn")
+	scene.blueprint = load("res://scene/3/blueprint.tscn")
+	scene.cubicle = load("res://scene/3/cubicle.tscn")
+	
 
 
 func init_vec():

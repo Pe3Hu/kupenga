@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://buh07ci8fbq5l"]
+
+[ext_resource type="Script" path="res://scene/3/cubicle.gd" id="1_v38w1"]
+[ext_resource type="PackedScene" uid="uid://ciw38iqel0v5a" path="res://scene/0/icon.tscn" id="2_1jvmc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
+
+[node name="Cubicle" type="MarginContainer"]
+custom_minimum_size = Vector2(5, 5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_v38w1")
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Impact" type="MarginContainer" parent="HBox"]
+layout_mode = 2
+
+[node name="Effect" parent="HBox/Impact" instance=ExtResource("2_1jvmc")]
+layout_mode = 2
+
+[node name="Value" parent="HBox/Impact" instance=ExtResource("2_1jvmc")]
+layout_mode = 2
+
+[node name="Direction" parent="HBox" instance=ExtResource("2_1jvmc")]
+visible = false
+layout_mode = 2
+
+[node name="Conditions" type="HBoxContainer" parent="HBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Comparison" parent="HBox/Conditions" instance=ExtResource("2_1jvmc")]
+visible = false
+layout_mode = 2
+
+[node name="Sector" parent="HBox/Conditions" instance=ExtResource("2_1jvmc")]
+visible = false
+layout_mode = 2
+
+[node name="Type" parent="HBox/Conditions" instance=ExtResource("2_1jvmc")]
+visible = false
+layout_mode = 2
+
+[node name="Subtype" parent="HBox/Conditions" instance=ExtResource("2_1jvmc")]
+visible = false
+layout_mode = 2

@@ -26,6 +26,6 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Pantheons" type="HBoxContainer" parent="."]
+[node name="Architects" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
