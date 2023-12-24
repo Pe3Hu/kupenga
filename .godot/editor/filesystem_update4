@@ -1,0 +1,14 @@
+res://scene/2/planet.tscn
+res://scene/2/planet.gd
+res://scene/2/area.tscn
+res://scene/2/vein.tscn
+res://script/Global.gd
+res://scene/2/area.gd
+res://scene/0/game.gd
+res://scene/1/cradle.gd
+res://scene/2/space.tscn
+res://scene/2/field.tscn
+res://scene/2/space.gd
+res://scene/2/spot.tscn
+res://scene/2/field.gd
+res://scene/2/spot.gd
