@@ -4,6 +4,7 @@ extends MarginContainer
 @onready var blueprints = $Blueprints
 
 var bureau = null
+var kind = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -13,7 +14,9 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_blueprints() -> void:
-	for _i in 1:
+	kind = Global.arr.layer.pick_random()
+	
+	for _i in 3:
 		add_blueprint()
 
 

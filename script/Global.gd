@@ -28,7 +28,9 @@ func init_arr() -> void:
 	arr.type = ["corner", "edge", "center"]
 	arr.subtype = ["core", "axis", "diagonal", "variance"]
 	arr.comparison = ["less", "equal", "more"]
+	arr.cubicle = ["value", "effect", "direction", "sector", "type", "subtype", "comparison"]
 	arr.kind = ["sector", "type", "subtype", "comparison"]
+	arr.layer = ["sector", "type", "subtype"]
 
 
 func init_num() -> void:

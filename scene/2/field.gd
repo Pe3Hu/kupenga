@@ -5,12 +5,19 @@ extends MarginContainer
 
 var space = null
 var sectors = {}
+var current = {}
+var selection = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
 	space = input_.space
 	
 	init_spots()
+	current.layer = null
+	#change_current_layer(0)
+	prepare_selection()
+	var cubicle = space.sketch.bureau.portfolios.get_child(0).blueprints.get_child(0).cubicles.get_child(1)
+	#find_all_suitable_spots(cubicle)
 
 
 func init_spots() -> void:
@@ -99,3 +106,90 @@ func get_spot(grid_: Vector2) -> Variant:
 		return spots.get_child(index)
 	
 	return null
+
+
+func change_current_layer(shift_: int) -> void:
+	if current.layer == null:
+		current.layer = Global.arr.layer.front()
+	
+	var index = Global.arr.layer.find(current.layer)
+	index = (index + shift_ + Global.arr.layer.size()) % Global.arr.layer.size()
+	current.layer = Global.arr.layer[index]
+	
+	for spot in spots.get_children():
+		spot.update_icon(current.layer)
+		spot.recolor(current.layer)
+
+
+func find_all_suitable_spots(cubicle_: MarginContainer) -> void:
+	reset_spots()
+	var conditions = cubicle_.get_conditions()
+	var targets = []
+	var suitables = {}
+	suitables.intersection = []
+	var windroses = {}
+	windroses.origin = cubicle_.get_windroses()
+	windroses.reflected = []
+	
+	for windrose in windroses.origin:
+		var index = Global.dict.windrose.keys().find(windrose)
+		index = (index + Global.dict.windrose.keys().size() / 2) % Global.dict.windrose.keys().size()
+		var reflection = Global.dict.windrose.keys()[index]
+		windroses.reflected.append(reflection)
+		suitables[reflection] = []
+	
+	if conditions.keys().is_empty(): 
+		suitables.append_array(spots.get_children())
+	else:
+		for spot in spots.get_children():
+			if spot.check_condition(conditions):
+				targets.append(spot)
+				spot.paint("Red")
+		
+		for target in targets:
+			for windrose in windroses.reflected:
+				if target.windroses.has(windrose):
+					var spot = target.windroses[windrose]
+					suitables[windrose].append(spot)
+					
+					if !suitables.intersection.has(spot):
+						suitables.intersection.append(spot)
+	
+		for _i in range(suitables.intersection.size()-1,-1,-1):
+			var spot = suitables.intersection[_i]
+			var flag = true
+			
+			for windrose in windroses.reflected:
+				flag = flag and suitables[windrose].has(spot)
+				
+				if !flag:
+					break
+			
+			if !flag:
+				suitables.intersection.erase(spot)
+		
+		for suitable in suitables.intersection:
+			if selection.has(suitable):
+				suitable.paint("Green")
+
+
+func reset_spots() -> void:
+	for spot in spots.get_children():
+		spot.reset()
+
+
+func prepare_selection() -> void:
+	selection = []
+	
+	for sector in sectors:
+		var options = []
+		
+		for spot in sectors[sector]:
+			if spot.free:
+				options.append(spot)
+		
+		for _i in 2:
+			var spot = options.pick_random()
+			selection.append(spot)
+			spot.paint("blue")
+			options.erase(spot)

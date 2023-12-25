@@ -38,5 +38,5 @@ layout_mode = 2
 [node name="Cradle" parent="HBox" instance=ExtResource("1_i3egr")]
 layout_mode = 2
 
-[node name="Universe" parent="HBox" instance=ExtResource("3_xgi5l")]
+[node name="Space" parent="HBox" instance=ExtResource("3_xgi5l")]
 layout_mode = 2

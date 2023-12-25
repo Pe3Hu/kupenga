@@ -21,9 +21,7 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_icons(input_: Dictionary) -> void:
-	var keys = ["value", "effect", "direction"]
-	
-	for key in keys:
+	for key in Global.arr.cubicle:
 		if input_.has(key):
 			var input = {}
 			input.type = key
@@ -35,14 +33,25 @@ func init_icons(input_: Dictionary) -> void:
 			var icon = get(key)
 			icon.set_attributes(input)
 			icon.visible = true
+
+
+func get_conditions() -> Dictionary:
+	var conditions = {}
 	
-	keys = ["comparison", "sector", "type", "subtype"]
+	for key in Global.arr.kind:
+		var icon = get(key)
+		
+		if icon.visible:
+			conditions[key] = icon.subtype
 	
-	for key in keys:
-		if input_.has(key):
-			var input = {}
-			input.type = key
-			input.subtype = input_[key]
-			var icon = get(key)
-			icon.set_attributes(input)
-			icon.visible = true
+	return conditions
+
+
+func get_windroses() -> Array:
+	var windroses = []
+	
+	for index in direction.subtype:
+		var windrose = Global.dict.windrose.keys()[int(index)]
+		windroses.append(windrose)
+	
+	return windroses

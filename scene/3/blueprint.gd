@@ -25,9 +25,8 @@ func roll_cubicles() -> void:
 	input.effect = "wound"
 	input.value = 9
 	input.direction = Global.get_random_key(Global.dict.direction)
-	var kind = Global.arr.kind.pick_random()
-	var key = Global.arr[kind].pick_random()
-	input[kind] = key
+	var key = Global.arr[portfolio.kind].pick_random()
+	input[portfolio.kind] = key
 	
 	cubicle = Global.scene.cubicle.instantiate()
 	cubicles.add_child(cubicle)
